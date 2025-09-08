@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-crear-citas',
@@ -11,6 +11,7 @@ export class CrearCitasComponent {
   hora='';
   sintomas='';
   formularioIncorrecto=false;
+  @Output() nuevaCita=new EventEmitter<any>();
   agregarCita(){
     if(this.nombre=='' || this.fecha==''|| this.hora=='' || this.sintomas==''){
       this.formularioIncorrecto=true;
@@ -23,7 +24,7 @@ export class CrearCitasComponent {
       hora:this.hora,
       sintomas:this.sintomas
     }
-    //@Output CITA;
+    this.nuevaCita.emit(CITA);
     this.resetCampos();
   }
   resetCampos(){
